@@ -1,4 +1,4 @@
- 
+
 [TOC]
 # 构建Tomcat 源码环境 
 ## 安装JDK，并设置JAVA_HOME环境变量等设置
@@ -265,7 +265,13 @@ java.lang.ClassNotFoundException: websocket.drawboard.DrawboardContextListener
 
 ```
 
+# 新建一个srcDebug分支专门用于分析代码，调试tomcat代码
+所有的注释代码逻辑都写在srcDebug分支下
+
 # 参考
+
+[源码环境构建在- github](https://github.com/JKAK47/Tomcat-project-src)
+
 [Tomat启动-源码跟踪解决ClasNotFound问题](https://blog.csdn.net/it_freshman/article/details/81539009)
 
 [Tomcat8源码分析系列-环境搭建](https://blog.csdn.net/Dwade_mia/article/details/79051370)
