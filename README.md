@@ -5,93 +5,98 @@
 ## 安装Ant1.9.8+ 以上的ant 配置并设置ANT_HOME配置，并将${ANT_HOME}/bin 目录添加到path环境变量里面
 ## [下载源码](https://tomcat.apache.org/download-80.cgi)
 ## 在构建tomcat 时候会下载一些构建依赖库，默认在 `${user.home}/tomcat-build-libs`目录下存放下载下来的依赖文件，如果你需要改存放位置设置`base.path`，只需要创建`${tomcat.source}/build.properties`文件重新定义 `${tomcat.source}/build.properties.default`文件 和 `${tomcat.source}/build.xml`文件定义的属性。
-## 进入`${tomcat.source}` tomcat 源码目录，执行ant 命令构建tomcat ，一旦构建完成可以看到BUILD SUCCESSFULLY 字样` ${tomcat.source}/output/build`目录下文件结构和 发行版tomcat目录结构一样；就是完整的tomcat 项目，可以直接使用。(如果不调试源码到这里即可，如果需要调试源码)
+## 进入`${tomcat.source}` tomcat 源码目录，执行`ant` 命令构建tomcat ，一旦构建完成可以看到BUILD SUCCESSFULLY 字样` ${tomcat.source}/output/build`目录下文件结构和 发行版tomcat目录结构一样；就是完整的tomcat 项目，可以直接使用。(如果不调试源码到这里即可，如果需要调试源码)
 ## Tomcat 转成maven项目并导入到IDEA 进行调试
 - 
 	- 我的tomcat源码路径是:`D:\Dev\tomcat\apache-tomcat-8.5.37-src-2`
 	- 在该源码路径下新建pom.xml文件并填写如下信息
 		```
 		<?xml version="1.0" encoding="UTF-8"?>
-		<project xmlns="http://maven.apache.org/POM/4.0.0"
-		         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-		    <modelVersion>4.0.0</modelVersion>
-		    <groupId>org.apache.tomcat</groupId>
-		    <artifactId>Tomcat-project-src</artifactId>
-		    <name>Tomcat8.5.37-SrcCode</name>
-		    <version>8.5.37</version>
-
-		    <build>
-		        <finalName>Tomcat-8.5.37</finalName>
-		        <sourceDirectory>java</sourceDirectory>
-		        <resources>
-		            <resource>
-		                <directory>java</directory>
-		            </resource>
-		        </resources>
-		        <plugins>
-		            <plugin>
-		                <groupId>org.apache.maven.plugins</groupId>
-		                <artifactId>maven-compiler-plugin</artifactId>
-		                <version>3.5.1</version>
-		                <configuration>
-		                    <encoding>UTF-8</encoding>
-		                    <source>1.8</source>
-		                    <target>1.8</target>
-		                </configuration>
-		            </plugin>
-		        </plugins>
-		    </build>
-
-		    <dependencies>
-		        <dependency>
-		            <groupId>junit</groupId>
-		            <artifactId>junit</artifactId>
-		            <version>4.12</version>
-		            <scope>test</scope>
-		        </dependency>
-		        <dependency>
-		            <groupId>org.easymock</groupId>
-		            <artifactId>easymock</artifactId>
-		            <version>3.4</version>
-		            <scope>test</scope>
-		        </dependency>
-		        <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
-		        <dependency>
-		            <groupId>org.apache.ant</groupId>
-		            <artifactId>ant</artifactId>
-		            <version>1.10.1</version>
-		        </dependency>
-
-		        <!-- <dependency>
-		            <groupId>ant</groupId>
-		            <artifactId>ant-apache-log4j</artifactId>
-		            <version>1.6.5</version>
-		        </dependency>
-		        <dependency>
-		            <groupId>ant</groupId>
-		            <artifactId>ant-commons-logging</artifactId>
-		            <version>1.6.5</version>
-		        </dependency> -->
-		        <dependency>
-		            <groupId>wsdl4j</groupId>
-		            <artifactId>wsdl4j</artifactId>
-		            <version>1.6.2</version>
-		        </dependency>
-		        <!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api -->
-		      <dependency>
-		          <groupId>javax.xml</groupId>
-		          <artifactId>jaxrpc-api</artifactId>
-		          <version>1.1</version>
-		      </dependency>
-		        <dependency>
-		            <groupId>org.eclipse.jdt.core.compiler</groupId>
-		            <artifactId>ecj</artifactId>
-		            <version>4.6.1</version>
-		        </dependency>
-		    </dependencies>
-		</project>
+        <project xmlns="http://maven.apache.org/POM/4.0.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>Tomcat-project-src</artifactId>
+            <name>Tomcat8.5.37-SrcCode</name>
+            <version>8.5.37</version>
+        
+            <build>
+                <finalName>Tomcat-8.5.37</finalName>
+                <sourceDirectory>java</sourceDirectory>
+                <resources>
+                    <resource>
+                        <directory>java</directory>
+                    </resource>
+                </resources>
+                <testResources>
+                    <testResource>
+                        <directory>test</directory>
+                    </testResource>
+                </testResources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.5.1</version>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        
+            <dependencies>
+                <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <version>4.12</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.easymock</groupId>
+                    <artifactId>easymock</artifactId>
+                    <version>3.4</version>
+                    <scope>test</scope>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+                <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant</artifactId>
+                    <version>1.10.1</version>
+                </dependency>
+        
+                <!-- <dependency>
+                    <groupId>ant</groupId>
+                    <artifactId>ant-apache-log4j</artifactId>
+                    <version>1.6.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>ant</groupId>
+                    <artifactId>ant-commons-logging</artifactId>
+                    <version>1.6.5</version>
+                </dependency> -->
+                <dependency>
+                    <groupId>wsdl4j</groupId>
+                    <artifactId>wsdl4j</artifactId>
+                    <version>1.6.2</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api -->
+              <dependency>
+                  <groupId>javax.xml</groupId>
+                  <artifactId>jaxrpc-api</artifactId>
+                  <version>1.1</version>
+              </dependency>
+                <dependency>
+                    <groupId>org.eclipse.jdt.core.compiler</groupId>
+                    <artifactId>ecj</artifactId>
+                    <version>4.6.1</version>
+                </dependency>
+            </dependencies>
+        </project>
 		```
 # 执行tomcat入口方法` org.apache.catalina.startup.Bootstrap.main` main 方法即可。
 如果 第一次启动遇到 类不存在，只需要将`${tomcat-src-directory}/webapps/example`文件夹删除即可。再次启动
