@@ -5,7 +5,7 @@
 ## 安装Ant1.9.8+ 以上的ant 配置并设置ANT_HOME配置，并将${ANT_HOME}/bin 目录添加到path环境变量里面
 ## [下载源码](https://tomcat.apache.org/download-80.cgi)
 ## 在构建tomcat 时候会下载一些构建依赖库，默认在 `${user.home}/tomcat-build-libs`目录下存放下载下来的依赖文件，如果你需要改存放位置设置`base.path`，只需要创建`${tomcat.source}/build.properties`文件重新定义 `${tomcat.source}/build.properties.default`文件 和 `${tomcat.source}/build.xml`文件定义的属性。
-## 进入`${tomcat.source}` tomcat 源码目录，执行`ant` 命令构建tomcat ，一旦构建完成可以看到BUILD SUCCESSFULLY 字样` ${tomcat.source}/output/build`目录下文件结构和 发行版tomcat目录结构一样；就是完整的tomcat 项目，可以直接使用。(如果不调试源码到这里即可，如果需要调试源码)
+## 进入`${tomcat.source}` tomcat 源码目录，执行`ant` 命令构建tomcat ，一旦构建完成可以看到BUILD SUCCESSFULLY 字样` ，如果构建不成功，可能是把${tomcat.source}/webapps/examples/目录给删除了，只需要添加上去即可，我删除它是为了启动tomcat 单步调试能启动。 ${tomcat.source}/output/build`目录下文件结构和 发行版tomcat目录结构一样；就是完整的tomcat 项目，可以直接使用。(如果不调试源码到这里即可，如果需要调试源码)
 ## Tomcat 转成maven项目并导入到IDEA 进行调试
 - 
 	- 我的tomcat源码路径是:`D:\Dev\tomcat\apache-tomcat-8.5.37-src-2`
@@ -273,6 +273,34 @@ java.lang.ClassNotFoundException: websocket.drawboard.DrawboardContextListener
 # 新建一个srcDebug分支专门用于分析代码，调试tomcat代码
 所有的注释代码逻辑都写在srcDebug分支下
 
+# 测试 
+启动`org.apache.catalina.startup.Bootstrap.main` main方法启动tomcat 
+输出如下信息说明启动成功：
+```xml
+信息: Deploying web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\docs]
+六月 29, 2019 11:08:03 上午 org.apache.catalina.util.SessionIdGeneratorBase createSecureRandom
+警告: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [250] milliseconds.
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\docs] has finished in [1,071] ms
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\host-manager]
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\host-manager] has finished in [105] ms
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\manager]
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\manager] has finished in [109] ms
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\ROOT]
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory [D:\Dev\tomcat\apache-tomcat-8.5.37-src\webapps\ROOT] has finished in [122] ms
+六月 29, 2019 11:08:03 上午 org.apache.coyote.AbstractProtocol start
+信息: Starting ProtocolHandler ["http-nio-8080"]
+六月 29, 2019 11:08:03 上午 org.apache.coyote.AbstractProtocol start
+信息: Starting ProtocolHandler ["ajp-nio-8009"]
+六月 29, 2019 11:08:03 上午 org.apache.catalina.startup.Catalina start
+信息: Server startup in 1603 ms
+```
 # 参考
 
 [源码环境构建在- github](https://github.com/JKAK47/Tomcat-project-src)
